@@ -13,7 +13,7 @@ from lm_explorer.util.sampling import random_sample
 MEDIUM_MODEL = 'https://storage.googleapis.com/allennlp/models/gpt2-345M-dump'
 
 class GPT2LanguageModel(LanguageModel):
-    def __init__(self, cache_size: int = 0, model_name: str = '117M') -> None:
+    def __init__(self, cache_size: int = 0, model_name: str = '117M',device='cuda') -> None:
         """
         Each cache element is about 8MB, so size accordingly.
         """
@@ -26,7 +26,8 @@ class GPT2LanguageModel(LanguageModel):
             self.model = GPT2LMHeadModel.from_pretrained(MEDIUM_MODEL)
         else:
             exit("model name not found")
-
+        self.model = self.model.to(device)
+        self.device = device
         # The end of text marker.
         self.END_OF_TEXT = self.tokenizer.encoder["<|endoftext|>"]
 
@@ -48,7 +49,7 @@ class GPT2LanguageModel(LanguageModel):
         else:
             token_ids = self.tokenizer.encode(previous) + self.tokenizer.encode(next)
 
-        inputs = torch.LongTensor([token_ids])
+        inputs = torch.LongTensor([token_ids]).to(self.device)
 
         logits, present = self.model(inputs, past=past)
         logits = logits[0, -1]
