@@ -5,14 +5,11 @@ Added some custom modifications from the original repo. This includes,
 # lm-explorer
 interactive explorer for language models (currently only OpenAI GPT-2)
 
-## Running 
-```
-
-## Running without Docker
-
+## Running
 First create and activate a Python 3.6 (or later) virtual environment. Then install the requirements
 
-```bash
+```
+bash
 $ pip install -r requirements.txt
 ```
 
