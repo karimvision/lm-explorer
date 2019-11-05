@@ -9,7 +9,6 @@ interactive explorer for language models (currently only OpenAI GPT-2)
 First create and activate a Python 3.6 (or later) virtual environment. Then install the requirements
 
 ```
-bash
 $ pip install -r requirements.txt
 ```
 
