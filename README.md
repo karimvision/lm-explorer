@@ -1,18 +1,11 @@
+Added some custom modifications from the original repo. This includes,
+1. Run model in GPU
+2. Custom api to get next words, given a sentence. This is useful for creating custom applications. 
+
 # lm-explorer
 interactive explorer for language models (currently only OpenAI GPT-2)
 
-## Running with Docker
-
-```bash
-# This creates a local directory where the model can be cached so you don't
-# have to download it everytime you execute 'docker run'.
-$ mkdir -p /$HOME/.pytorch_pretrained_bert
-$ docker build -t lm-explorer:latest .
-$ docker run -p 8000:8000 \
-    -v /$HOME/.pytorch_pretrained_bert:/root/.pytorch_pretrained_bert \
-    -v $(pwd):/local \
-    lm-explorer:latest \
-    python app.py --port 8000 --dev
+## Running 
 ```
 
 ## Running without Docker
@@ -26,5 +19,16 @@ $ pip install -r requirements.txt
 and start the app
 
 ```bash
-$ python app.py --port 8000 --dev
+$ python app.py 
 ```
+Make sure you have a ssh tunnel to the server running the app.
+You can then access the next words via the following code,
+
+```
+import requests
+res = requests.get('http://127.0.0.1:9000/api/get_next_words', json={"sentence":"I like to visit", "topk":20})
+if res.ok:
+    print(res.json())
+```
+
+Assuming you have a ssh tunnel from port 8000 to 9000
