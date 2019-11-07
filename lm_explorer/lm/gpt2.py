@@ -9,8 +9,9 @@ from lm_explorer.lm.language_model import LanguageModel
 from lm_explorer.util.cache import LRUCache
 from lm_explorer.util.sampling import random_sample
 
-
-MEDIUM_MODEL = 'https://storage.googleapis.com/allennlp/models/gpt2-345M-dump'
+model_345 = "/mnt/ed/lm-explorer/models/pytorch_models/345M/"
+model_774 = "/mnt/ed/lm-explorer/models/pytorch_models/774M/"
+model_1558 = "/mnt/ed/lm-explorer/models/pytorch_models/1558M/"
 
 class GPT2LanguageModel(LanguageModel):
     def __init__(self, cache_size: int = 0, model_name: str = '117M',device='cuda') -> None:
@@ -20,10 +21,10 @@ class GPT2LanguageModel(LanguageModel):
         # Cache stores tuples, so default value is a tuple
         self._cache = LRUCache(cache_size, default_value=(None, None))
         self.tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-        if model_name == '117M':
-            self.model = GPT2LMHeadModel.from_pretrained('gpt2')
-        elif model_name == '345M':
-            self.model = GPT2LMHeadModel.from_pretrained(MEDIUM_MODEL)
+        if model_name == '345M':
+            self.model = GPT2LMHeadModel.from_pretrained(model_345)
+        elif model_name == '774M':
+            self.model = GPT2LMHeadModel.from_pretrained(model_774)
         else:
             exit("model name not found")
         self.model = self.model.to(device)
