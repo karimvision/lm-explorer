@@ -59,6 +59,13 @@ class GPT2LanguageModel(LanguageModel):
         self._cache[key] = logits, present
 
         return logits
+    
+    def get_sentence_loss(self, sentence):
+        tokenize_input = self.tokenizer.tokenize(sentence)
+        # add end_of_text
+        tensor_input = torch.tensor([ [50256]  +  self.tokenizer.convert_tokens_to_ids(tokenize_input)]).to(self.device)
+        loss=self.model(tensor_input, lm_labels=tensor_input)
+        return loss.item() * len(tokenize_input)
 
     def __getitem__(self, index: int) -> str:
         return self.tokenizer.decode([index])
