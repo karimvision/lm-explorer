@@ -1,6 +1,6 @@
 Added some custom modifications to the original repo. This includes,
 1. Run model in GPU
-2. Api to get next words, given a sentence. This is useful for creating custom applications. 
+2. API to get next words, given a sentence. This is useful for creating custom applications. 
 
 # lm-explorer
 interactive explorer for language models (currently only OpenAI GPT-2)
