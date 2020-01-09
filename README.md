@@ -1,12 +1,12 @@
-Added some custom modifications from the original repo. This includes,
+Added some custom modifications to the original repo. This includes,
 1. Run model in GPU
-2. Custom api to get next words, given a sentence. This is useful for creating custom applications. 
+2. Api to get next words, given a sentence. This is useful for creating custom applications. 
 
 # lm-explorer
 interactive explorer for language models (currently only OpenAI GPT-2)
 
 ## Running
-First create and activate a Python 3.6 (or later) virtual environment. Then install the requirements
+First create and activate a Python 3.6 (or higher) virtual environment. Then install the requirements
 
 ```
 $ pip install -r requirements.txt
